@@ -21,20 +21,37 @@ class AnimatedButton extends StatefulWidget {
 
 class _AnimatedButtonState extends State<AnimatedButton> {
 
-
+bool isVisible = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: toggleVisible,
-      child: Icon(
-        Icons.location_on,
-        color: Colors.white,
-        size: 60,
+      child: Container(
+          width: 150,
+          height: 150,
+          color: Colors.grey.shade900,
+        child: AnimatedOpacity(
+          duration: Duration(milliseconds:500),
+          opacity: isVisible ? 1 : 0,
+          child: Icon(
+            Icons.location_on,
+            color: Colors.white,
+            size: 60,
+          ),
+        ),
       ),
     );
   }
 
   void toggleVisible() {
     print('Button clicked');
+    setState(() {
+      if(isVisible){
+        isVisible = false;
+      }
+      else{
+        isVisible =true;
+      }
+    });
   }
 }
